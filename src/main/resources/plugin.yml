@@ -1,0 +1,6 @@
+name: ItemAdder
+version: '${project.version}'
+main: me.fivevl.itemadder.Main
+api-version: 1.18
+authors: [ 5vl ]
+description: Create custom items with custom abilities!
