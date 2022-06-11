@@ -1,8 +1,8 @@
 package me.fivevl.itemadder
 
 enum class Type(type: String) {
-    SWORD("SWORD"),
+    WEAPON("WEAPON"),
     PICKAXE("PICKAXE"),
-    AXE("AXE"),
-    ITEM("ITEM")
+    ITEM("ITEM"),
+    OTHER("")
 }
