@@ -4,3 +4,6 @@ main: me.fivevl.itemadder.Main
 api-version: 1.18
 authors: [ 5vl ]
 description: Create custom items with custom abilities!
+commands:
+  items:
+    description: Main item GUI.

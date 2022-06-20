@@ -1,6 +1,6 @@
 package me.fivevl.itemadder
 
-enum class Type(type: String) {
+enum class Type(val type: String) {
     WEAPON("WEAPON"),
     PICKAXE("PICKAXE"),
     ITEM("ITEM"),
