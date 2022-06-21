@@ -14,10 +14,10 @@ object Utils {
         for (s in arr) {
             if (s.contains("\n")) {
                 for (ss in s.split("\n")) {
-                    lore.add(color(ss))
+                    lore.add(color("<!i>$ss"))
                 }
             } else {
-                lore.add(color(s))
+                lore.add(color("<!i>$s"))
             }
         }
         return lore

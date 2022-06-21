@@ -8,21 +8,25 @@ import org.bukkit.Material
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
 
-class Item(uniqueName: String, name: Component, rarity: Rarity, material: Material, type: ItemType, lore: String) {
+class Item(uniqueName: String, name: String, private val rarity: Rarity, material: Material, private val type: ItemType, private val lore: String) {
     val finalItem: ItemStack
     val abilities = HashMap<(PlayerInteractEvent) -> Unit, AbilityType>()
 
     init {
         val item = ItemStack(material)
         val meta = item.itemMeta
-        meta.displayName(name)
+        meta.displayName(Utils.color("<!i>${rarity.color}$name"))
         meta.lore(Utils.loreBuilder(lore, "", rarity.formatted + " " + type.type))
         item.itemMeta = meta
         finalItem = item
         Items.items[uniqueName] = this
     }
 
-    fun addAbility(type: AbilityType, runnable: (PlayerInteractEvent) -> Unit) {
-        abilities[runnable] = type
+    fun addAbility(abilityType: AbilityType, name: String, addLore: String, runnable: (PlayerInteractEvent) -> Unit) {
+        abilities[runnable] = abilityType
+        val clickType = if (abilityType == AbilityType.LEFT_CLICK) "Left click" else if (abilityType == AbilityType.RIGHT_CLICK) "Right click" else "Other type"
+        val meta = finalItem.itemMeta
+        meta.lore(Utils.loreBuilder(lore, "", "<yellow><bold>$clickType: <gold>$name", addLore, rarity.formatted + " " + type.type))
+        finalItem.itemMeta = meta
     }
 }

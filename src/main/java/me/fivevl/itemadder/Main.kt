@@ -12,8 +12,8 @@ class Main : JavaPlugin() {
     override fun onEnable() {
         Bukkit.getPluginManager().registerEvents(InteractListener(), this)
         getCommand("items")?.setExecutor(ItemsCommand())
-        Item("TEST_ITEM", Utils.color("<blue>Test Item"), Rarity.EPIC, Material.STONE_SWORD, ItemType.WEAPON, "<red>The most basic testing</red>\n<blue>sword, by 5vl</blue>")
-        Items.items["TEST_ITEM"]!!.addAbility(AbilityType.RIGHT_CLICK) { e: PlayerInteractEvent ->
+        Item("TEST_ITEM", "Test Item", Rarity.EPIC, Material.STONE_SWORD, ItemType.WEAPON, "<red>The most basic testing</red>\n<blue>sword, by 5vl</blue>")
+        Items.items["TEST_ITEM"]!!.addAbility(AbilityType.RIGHT_CLICK, "Send Message", "<light_purple>Sends you a nice message\n<light_purple>for using this item!") { e: PlayerInteractEvent ->
             e.player.sendMessage(Utils.color("<red>You right clicked the TEST_ITEM!"))
         }
     }

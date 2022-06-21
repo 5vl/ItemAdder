@@ -27,6 +27,7 @@ class InteractListener : Listener {
         }
     }
 
+    @Suppress("deprecation")
     @EventHandler
     fun onInvClick(e: InventoryClickEvent) {
         if (e.whoClicked !is Player) return
@@ -34,7 +35,7 @@ class InteractListener : Listener {
         e.isCancelled = true
         if (e.currentItem == null) return
         e.whoClicked.inventory.addItem(e.currentItem!!)
-        e.whoClicked.sendMessage(Utils.color("<green>Added <blue>${e.currentItem!!.itemMeta.displayName()} <green>to your inventory"))
+        e.whoClicked.sendMessage(Utils.color("<green>Added <blue>${e.currentItem!!.itemMeta.displayName} <green>to your inventory"))
     }
 
     @EventHandler
