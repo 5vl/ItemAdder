@@ -14,6 +14,7 @@ class ItemsCommand : CommandExecutor {
         val p = sender.player!!
         if (p.hasPermission("itemadder.items")) {
             p.openInventory(ItemsGui.getGui())
+            Utils.inItemsGui.add(p)
         } else {
             p.sendMessage(Utils.color("<red>You don't have permission to use this command"))
         }

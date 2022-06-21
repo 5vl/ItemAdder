@@ -1,5 +1,6 @@
 package me.fivevl.itemadder
 
+import me.fivevl.itemadder.types.AbilityType
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -12,14 +13,14 @@ class InteractListener : Listener {
     @EventHandler
     fun onInteract(e: PlayerInteractEvent) {
         if (e.item == null) return
-        for (check in Utils.items.values) {
+        for (check in Items.items.values) {
             if (check.finalItem == e.item) {
                 for (ability in check.abilities.keys) {
                     if (check.abilities[ability]!! == AbilityType.RIGHT_CLICK && (e.action == Action.RIGHT_CLICK_AIR || e.action == Action.RIGHT_CLICK_BLOCK)) {
-                        ability.run()
+                        ability.invoke(e)
                     }
                     if (check.abilities[ability]!! == AbilityType.LEFT_CLICK && (e.action == Action.LEFT_CLICK_AIR || e.action == Action.LEFT_CLICK_BLOCK)) {
-                        ability.run()
+                        ability.invoke(e)
                     }
                 }
             }

@@ -1,4 +1,4 @@
-package me.fivevl.itemadder
+package me.fivevl.itemadder.types
 
 enum class Rarity(val formatted: String) {
     COMMON("<white><bold>COMMON"),

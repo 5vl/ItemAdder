@@ -3,11 +3,8 @@ package me.fivevl.itemadder
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.entity.Player
-import org.bukkit.event.player.PlayerInteractEvent
 
 object Utils {
-    lateinit var interactEvent: PlayerInteractEvent
-    val items = HashMap<String, Item>()
     val inItemsGui = ArrayList<Player>()
     fun color(s: String): Component {
         return MiniMessage.miniMessage().deserialize(s)
