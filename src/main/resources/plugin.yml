@@ -7,3 +7,5 @@ description: Create custom items with custom abilities!
 commands:
   items:
     description: Main item GUI.
+  get:
+    description: Get item without GUI.

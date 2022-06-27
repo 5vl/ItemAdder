@@ -8,19 +8,21 @@ import org.bukkit.event.block.Action
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.inventory.InventoryCloseEvent
 import org.bukkit.event.player.PlayerInteractEvent
+import kotlin.math.roundToInt
 
 class InteractListener : Listener {
     @EventHandler
     fun onInteract(e: PlayerInteractEvent) {
         if (e.item == null) return
         for (check in Items.items.values) {
-            if (check.finalItem == e.item) {
+            if (check.finalItem.isSimilar(e.item)) {
                 for (ability in check.abilities.keys) {
-                    if (check.abilities[ability]!! == AbilityType.RIGHT_CLICK && (e.action == Action.RIGHT_CLICK_AIR || e.action == Action.RIGHT_CLICK_BLOCK)) {
-                        ability.invoke(e)
-                    }
-                    if (check.abilities[ability]!! == AbilityType.LEFT_CLICK && (e.action == Action.LEFT_CLICK_AIR || e.action == Action.LEFT_CLICK_BLOCK)) {
-                        ability.invoke(e)
+                    if ((check.abilities[ability]!! == AbilityType.RIGHT_CLICK && (e.action == Action.RIGHT_CLICK_AIR || e.action == Action.RIGHT_CLICK_BLOCK)) || (check.abilities[ability]!! == AbilityType.LEFT_CLICK && (e.action == Action.LEFT_CLICK_AIR || e.action == Action.LEFT_CLICK_BLOCK))) {
+                        val cooldownSeconds = ability.run(e)
+                        if (cooldownSeconds != null) {
+                            // This counts up i cba to change rn
+                            e.player.sendMessage(Utils.color("<red>This ability is on cooldown for ${(cooldownSeconds * 10.0).roundToInt() / 10.0} seconds."))
+                        }
                     }
                 }
             }
@@ -35,7 +37,6 @@ class InteractListener : Listener {
         e.isCancelled = true
         if (e.currentItem == null) return
         e.whoClicked.inventory.addItem(e.currentItem!!)
-        e.whoClicked.sendMessage(Utils.color("<green>Added <blue>${e.currentItem!!.itemMeta.displayName} <green>to your inventory"))
     }
 
     @EventHandler

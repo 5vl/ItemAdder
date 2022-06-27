@@ -12,13 +12,9 @@ object Utils {
     fun loreBuilder(vararg arr: String): ArrayList<Component> {
         val lore = ArrayList<Component>()
         for (s in arr) {
-            if (s.contains("\n")) {
-                for (ss in s.split("\n")) {
-                    lore.add(color("<!i>$ss"))
-                }
-            } else {
-                lore.add(color("<!i>$s"))
-            }
+            if (s.contains("\n"))
+                for (ss in s.split("\n")) lore.add(color("<!i>$ss"))
+            else lore.add(color("<!i>$s"))
         }
         return lore
     }
